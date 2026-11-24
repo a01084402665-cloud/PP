@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PP — AI Video Content Creator & Engineer</title>
+  <meta name="description" content="작은 컷들이 모여 한 편의 이야기가 된다. AI로 만드는 스마트 영상 콘텐츠 제작 엔지니어 포트폴리오">
+  
+  <!-- Favicon / SVG Logo Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2308080a'/><path d='M30 25h22c10 0 18 6 18 16s-8 16-18 16H42v23H30V25zm12 22h10c4.5 0 8-2.5 8-6s-3.5-6-8-6H42v12z' fill='%23d4af37'/><path d='M50 40h20c8 0 14 5 14 13s-6 13-14 13H60v14H50V40zm10 18h10c2.5 0 5-1.5 5-4.5s-2.5-4.5-5-4.5H60v9z' fill='%23f3e5ab'/></svg>">
+
+  <!-- Google Fonts: Cormorant Garamond, Cinzel, Montserrat, Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="luxury-dark">
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Ambient Luxury Background Glows -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-middle"></div>
+  <div class="ambient-glow glow-bottom"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- Header / Navigation -->
+  <header class="luxury-header" id="header">
+    <div class="header-container">
+      <a href="#hero" class="brand-logo" data-scroll-to="#hero">
+        <div class="logo-symbol">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="21" stroke="url(#goldGrad)" stroke-width="1.2" stroke-opacity="0.8"/>
+            <path d="M14 11H25C29.4183 11 33 14.134 33 18C33 21.866 29.4183 25 25 25H19V33H14V11Z" stroke="url(#goldGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 19H29C32.3137 19 35 21.6863 35 25C35 28.3137 32.3137 31 29 31H25V33" stroke="url(#goldGradLight)" stroke-width="1.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F3E5AB" />
+                <stop offset="0.5" stop-color="#D4AF37" />
+                <stop offset="1" stop-color="#996515" />
+              </linearGradient>
+              <linearGradient id="goldGradLight" x1="0" y1="0" x2="35" y2="35" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFF3C4" />
+                <stop offset="1" stop-color="#D4AF37" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">PP STUDIO</span>
+          <span class="logo-sub">AI CINEMATIC ATELIER</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#hero" class="nav-link active" data-scroll-to="#hero">홈 <span>HOME</span></a></li>
+          <li class="nav-item"><a href="#portfolio" class="nav-link" data-scroll-to="#portfolio">포폴 <span>PORTFOLIO</span></a></li>
+          <li class="nav-item"><a href="#profile" class="nav-link" data-scroll-to="#profile">프로필 <span>PROFILE</span></a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link" data-scroll-to="#skills">스킬 <span>SKILLS</span></a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link" data-scroll-to="#contact">연락처 <span>CONTACT</span></a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Action -->
+      <div class="header-actions">
+        <!-- Theme Mode Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="테마 모드 전환" title="다크 / 라이트 모드 전환">
+          <i data-lucide="sun" class="theme-icon theme-sun"></i>
+          <i data-lucide="moon" class="theme-icon theme-moon"></i>
+        </button>
+        <a href="#contact" class="luxury-btn btn-header" data-scroll-to="#contact">
+          <span class="btn-text">프로젝트 의뢰</span>
+          <i data-lucide="arrow-up-right" class="btn-icon"></i>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 열기">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-menu-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-inner">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link" data-scroll-to="#hero">01. 홈 <span>HOME</span></a></li>
+        <li><a href="#portfolio" class="mobile-nav-link" data-scroll-to="#portfolio">02. 포트폴리오 <span>PORTFOLIO</span></a></li>
+        <li><a href="#profile" class="mobile-nav-link" data-scroll-to="#profile">03. 프로필 <span>PROFILE</span></a></li>
+        <li><a href="#skills" class="mobile-nav-link" data-scroll-to="#skills">04. 스킬 <span>SKILLS</span></a></li>
+        <li><a href="#contact" class="mobile-nav-link" data-scroll-to="#contact">05. 연락처 <span>CONTACT</span></a></li>
+      </ul>
+      <div class="mobile-contact-info">
+        <button class="mobile-theme-btn" id="mobileThemeToggleBtn">
+          <i data-lucide="sun" class="theme-icon theme-sun"></i>
+          <i data-lucide="moon" class="theme-icon theme-moon"></i>
+          <span class="theme-mode-label">테마 변경 (Dark / Light)</span>
+        </button>
+        <p class="drawer-email">a01084402665@gmail.com</p>
+        <span class="drawer-quote">"작은 컷들이 모여 한 편의 이야기가 된다."</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- SECTION 1: HERO -->
+    <section class="section-hero" id="hero">
+      <div class="hero-bg-wrapper">
+        <div class="hero-grid-pattern"></div>
+        <div class="hero-radial-vignette"></div>
+      </div>
+
+      <div class="hero-container">
+        <!-- Badge -->
+        <div class="hero-badge reveal-elem">
+          <span class="badge-dot"></span>
+          <span class="badge-text">AI Smart Video Content Engineer & Creator</span>
+          <span class="badge-glow"></span>
+        </div>
+
+        <!-- Main Title / Statement -->
+        <div class="hero-statement">
+          <p class="hero-kicker reveal-elem">AI CINEMATIC & STORYTELLING</p>
+          <h1 class="hero-title reveal-elem">
+            <span class="title-line">작은 컷들이 모여</span>
+            <span class="title-line gold-shimmer">한 편의 이야기가 된다.</span>
+          </h1>
+          <p class="hero-subtitle reveal-elem">
+            Every Single Cut Gathers to Form an Eternal Narrative.<br>
+            인공지능의 정교한 기술과 인간의 감성적 연출을 결합하여 경이로운 시각적 경험을 창조합니다.
+          </p>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="hero-cta-group reveal-elem">
+          <a href="#portfolio" class="luxury-btn btn-primary" data-scroll-to="#portfolio">
+            <span class="btn-text">포트폴리오 영상 감상</span>
+            <i data-lucide="play" class="btn-icon-fill"></i>
+          </a>
+          <a href="#profile" class="luxury-btn btn-ghost" data-scroll-to="#profile">
+            <span class="btn-text">크리에이터 프로필</span>
+            <i data-lucide="user" class="btn-icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <a href="#portfolio" class="hero-scroll-indicator" data-scroll-to="#portfolio">
+        <span class="indicator-text">SCROLL TO DISCOVER</span>
+        <div class="mouse-icon">
+          <div class="mouse-wheel"></div>
+        </div>
+      </a>
+    </section>
+
+    <!-- MARQUEE TICKER (Parallax Text Stream) -->
+    <div class="luxury-marquee">
+      <div class="marquee-track">
+        <div class="marquee-item"><span>AI VIDEO GENERATION</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>CINEMATOGRAPHY & DIRECTION</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>COMFYUI PIPELINE</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>PROMPT ENGINEERING</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>VIBE CODING & ANTIGRAVITY</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>CHARACTER CONSISTENCY</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>SUNO AI & SOUND DESIGN</span><span class="gold-star">✦</span></div>
+        <!-- Duplicated for infinite loop -->
+        <div class="marquee-item"><span>AI VIDEO GENERATION</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>CINEMATOGRAPHY & DIRECTION</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>COMFYUI PIPELINE</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>PROMPT ENGINEERING</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>VIBE CODING & ANTIGRAVITY</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>CHARACTER CONSISTENCY</span><span class="gold-star">✦</span></div>
+        <div class="marquee-item"><span>SUNO AI & SOUND DESIGN</span><span class="gold-star">✦</span></div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: PORTFOLIO -->
+    <section class="section-portfolio" id="portfolio">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="section-tag">CINEMATIC ARCHIVES</span>
+          <h2 class="section-title">
+            포트폴리오 <span class="gold-gradient-text">영상 갤러리</span>
+          </h2>
+          <div class="gold-accent-line"></div>
+          <p class="section-desc">
+            AI 영상 생성 툴과 감각적인 사운드, 스토리보드 기획이 융합된 8편의 엄선된 작품 컬렉션입니다.<br>
+            카드를 클릭하시면 고화질 시네마틱 모달 플레이어로 전체 영상을 즉시 감상하실 수 있습니다.
+          </p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="portfolio-filter-bar">
+          <button class="filter-btn active" data-filter="all">전체보기 (8)</button>
+          <button class="filter-btn" data-filter="awards">공모전 & 다큐멘터리</button>
+          <button class="filter-btn" data-filter="commercial">브랜드 필름 & 광고</button>
+          <button class="filter-btn" data-filter="story">스토리 & 캐릭터 애니메이션</button>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid" id="portfolioGrid">
+          
+          <!-- Card 1: 녹청자 -->
+          <article class="portfolio-card" data-category="awards story" data-video="movie/녹청자.mp4" data-title="녹청자 : 비색의 울림" data-desc="전통 청자의 우아한 비색과 도공의 혼을 AI 시네마틱 생성으로 재해석한 예술 영상. 한국적 미학의 정수를 현대적 디지털 비주얼로 승화시켰습니다." data-ratio="vertical">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_nokcheongja.jpg" alt="녹청자 : 비색의 울림 영상 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/녹청자.mp4"></video>
+                </div>
+                <div class="card-badge vertical-tag">9:16 VERTICAL</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">ART & TRADITION</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">녹청자 : 비색의 울림</h3>
+                <p class="card-snippet">전통 도자기의 유려한 곡선과 푸른 비색을 AI 비디오 엔진으로 시네마틱하게 재현한 헤리티지 필름.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: 담양관방제림_공모전 -->
+          <article class="portfolio-card" data-category="awards" data-video="movie/담양관방제림_공모전.mp4" data-title="담양 관방제림 : 시간과 자연이 머무는 숲" data-desc="공모전 출품작. 300년 역사의 천연기념물 담양 관방제림의 사계절 풍광과 생태적 가치를 극적인 라이팅과 웅장한 카메라 무빙으로 담아낸 환경 공모전 영상입니다." data-ratio="vertical">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_damyang.jpg" alt="담양 관방제림 : 시간과 자연이 머무는 숲 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/담양관방제림_공모전.mp4"></video>
+                </div>
+                <div class="card-badge award-tag">AWARD ENTRY</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">NATURE DOCUMENTARY</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">담양 관방제림 : 시간과 자연이 머무는 숲</h3>
+                <p class="card-snippet">거대한 느티나무 숲과 푸른 영산강 상류의 신비로운 정취를 포착한 생태 자연 다큐멘터리.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: 독도공모전 -->
+          <article class="portfolio-card featured-wide" data-category="awards" data-video="movie/독도공모전.mp4" data-title="독도 : 동해의 푸른 새벽" data-desc="독도 공모전 출품작. 거친 파도와 우뚝 솟은 동도·서도의 장엄한 절경, 독도의 생태계와 역사적 상징성을 AI 고해상도 생성 기술과 웅장한 오케스트레이션으로 완성한 시네마틱입니다." data-ratio="horizontal">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_dokdo.jpg" alt="독도 : 동해의 푸른 새벽 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/독도공모전.mp4"></video>
+                </div>
+                <div class="card-badge award-tag">CINEMA 21:9</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">HERITAGE & CINEMA</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">독도 : 동해의 푸른 새벽</h3>
+                <p class="card-snippet">파도의 웅장함과 괭이갈매기의 비상, 우리 국토의 끝에서 피어나는 숭고한 이야기를 담은 공모전 역작.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: 블랙잭 에이다4막 심형석 -->
+          <article class="portfolio-card featured-wide" data-category="story awards" data-video="movie/블랙잭 에이다4막 심형석.mp4" data-title="에이다 블랙잭 : 북극의 여자 로빈슨" data-desc="1921년 극한의 북극 브랑겔 섬에서 홀로 2년간 살아남아 전 세계를 놀라게 한 '북극의 여성 로빈슨 크루소', 에이다 블랙잭의 기적 같은 생존 실화를 다룬 시네마틱 다큐멘터리입니다. 고증에 기반한 AI 캐릭터 일관성과 압도적인 북극 미장센을 구현했습니다." data-ratio="horizontal">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_blackjack.jpg" alt="에이다 블랙잭 : 북극의 여자 로빈슨 다큐 영상 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/블랙잭 에이다4막 심형석.mp4"></video>
+                </div>
+                <div class="card-badge story-tag">SURVIVAL DOCU</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">HISTORICAL DOCUMENTARY</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">에이다 블랙잭 : 북극의 여자 로빈슨</h3>
+                <p class="card-snippet">영하 50도의 혹한과 고립 속에서 피어난 2년간의 기적. 북극의 침묵을 깬 숭고한 인간 승리 실화 다큐멘터리.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: 나레이션넣은카누오렌지라떼 -->
+          <article class="portfolio-card" data-category="commercial" data-video="movie/나레이션넣은카누오렌지라떼.mp4" data-title="카누 오렌지 라떼 : 상큼함이 번지는 순간" data-desc="깊은 에스프레소의 풍미와 상큼한 오렌지 과즙, 부드러운 우유 거품의 감각적인 조화를 감미로운 AI 나레이션과 함께 연출한 프리미엄 커피 브랜드 커머셜 광고 필름입니다." data-ratio="horizontal">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_kanu.jpg" alt="카누 오렌지 라떼 : 상큼함이 번지는 순간 광고 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/나레이션넣은카누오렌지라떼.mp4"></video>
+                </div>
+                <div class="card-badge brand-tag">COMMERCIAL</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">BRAND COMMERCIAL</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">카누 오렌지 라떼 : 상큼함이 번지는 순간</h3>
+                <p class="card-snippet">깊고 진한 에스프레소와 상큼한 오렌지의 감각적인 조우. 일상의 휴식을 부드럽게 깨우는 프리미엄 커피 CF.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6: 발렌 -->
+          <article class="portfolio-card" data-category="commercial story" data-video="movie/발렌.mp4" data-title="발렌타인 : 타인이 아닌 내 사람" data-desc="'발렌타인'이라는 이름 속에 '타인'이 있지만, 오늘만큼은 내 사람을 챙기는 날. 스쳐 지나가는 바쁜 일상 속에서 작은 초콜릿 한 조각으로 따뜻한 온기를 나누는 감동적인 나레이션 브랜드 필름입니다." data-ratio="horizontal">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_valen.jpg" alt="발렌타인 : 타인이 아닌 내 사람 영상 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/발렌.mp4"></video>
+                </div>
+                <div class="card-badge brand-tag">EMOTIONAL CF</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">BRAND NARRATION</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">발렌타인 : 타인이 아닌 내 사람</h3>
+                <p class="card-snippet">스쳐 지나가는 타인 속에서 내 사람에게 건네는 따뜻한 온기. 감동적인 보이스 나레이션의 브랜드 무비.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 7: 어도_공모전8회 -->
+          <article class="portfolio-card" data-category="awards" data-video="movie/어도_공모전8회.mov" data-title="어도 : 생명의 물길" data-desc="강과 바다를 잇는 물고기들의 생명 통로인 '어도'를 주제로, 수중 생태계의 아름다움과 보존의 메시지를 감동적으로 연출한 다큐멘터리 영상입니다." data-ratio="vertical">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_eodo.jpg" alt="어도 : 생명의 물길 영상 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/어도_공모전8회.mov"></video>
+                </div>
+                <div class="card-badge award-tag">AWARD ENTRY</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">ECOLOGICAL CAMPAIGN</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">어도 : 생명의 물길</h3>
+                <p class="card-snippet">생명의 강을 거슬러 오르는 여정, 생태 보존과 어도의 가치를 담은 감동적인 캠페인 필름.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 8: 브금넣은바니양 -->
+          <article class="portfolio-card" data-category="story" data-video="movie/브금넣은바니양.mp4" data-title="국자와 티스푼 : 크기가 달라도 괜찮아" data-desc="이솝우화의 따뜻한 교훈을 담은 힐링 수채화 동화 숏폼 애니메이션. 커다란 국자를 든 백호와 작은 티스푼을 쥔 토끼 바니양의 이야기를 통해, 저마다에게 꼭 맞는 쓰임새와 가치가 있음을 잔잔한 나레이션과 맞춤 BGM으로 전합니다." data-ratio="vertical">
+            <div class="card-inner">
+              <div class="card-media-wrap">
+                <img src="thumbnails/thumb_bunny.jpg" alt="국자와 티스푼 : 크기가 달라도 괜찮아 영상 썸네일" class="card-poster" loading="lazy">
+                <div class="video-preview-holder">
+                  <video class="hover-preview-video" muted loop playsinline preload="none" data-src="movie/브금넣은바니양.mp4"></video>
+                </div>
+                <div class="card-badge story-tag">FAIRYTALE ANIMATION</div>
+                <div class="play-overlay">
+                  <div class="play-circle">
+                    <i data-lucide="play" class="play-icon"></i>
+                  </div>
+                  <span class="play-hint">클릭하여 영상 재생</span>
+                </div>
+              </div>
+              <div class="card-info">
+                <div class="card-meta">
+                  <span class="meta-tag">HEALING STORYBOOK</span>
+                  <span class="meta-year">2026</span>
+                </div>
+                <h3 class="card-title">국자와 티스푼 : 크기가 달라도 괜찮아</h3>
+                <p class="card-snippet">크기가 다르다고 가치가 다른 것은 아니다. 나만의 속도와 크기를 따뜻하게 긍정하는 감성 힐링 우화.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PROFILE -->
+    <section class="section-profile" id="profile">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="section-tag">THE CREATIVE IDENTITY</span>
+          <h2 class="section-title">
+            크리에이터 <span class="gold-gradient-text">프로필 & 페르소나</span>
+          </h2>
+          <div class="gold-accent-line"></div>
+          <p class="section-desc">
+            "작은 컷들이 모여 한 편의 이야기가 된다."<br>
+            AI 프롬프트 엔지니어링과 캐릭터 파이프라인으로 구축한 다차원 페르소나를 만나보세요.
+          </p>
+        </div>
+
+        <div class="profile-showcase-grid">
+          <!-- Left: Fixed Single Character Persona Showcase -->
+          <div class="persona-interactive-card">
+            <div class="persona-card-header">
+              <div class="status-indicator">
+                <span class="pulse-dot"></span>
+                <span>OFFICIAL CREATOR PERSONA</span>
+              </div>
+            </div>
+
+            <!-- Display Stage -->
+            <div class="persona-display-stage">
+              <div class="persona-image-frame" id="personaFrame">
+                <img src="IMG/추천작.png" alt="크리에이터 대표 캐릭터 페르소나" id="personaImage" class="persona-img" loading="lazy">
+                <div class="frame-corner corner-tl"></div>
+                <div class="frame-corner corner-tr"></div>
+                <div class="frame-corner corner-bl"></div>
+                <div class="frame-corner corner-br"></div>
+                <div class="persona-floating-badge" id="personaBadge">SIGNATURE CHARACTER</div>
+              </div>
+              <div class="persona-info-panel">
+                <h4 class="persona-name" id="personaTitle">시그니처 페르소나</h4>
+                <p class="persona-detail" id="personaDesc">
+                  나를 표현하는 단 하나의 고유한 AI 캐릭터 페르소나.<br>
+                  단정한 니트와 감각적인 톤앤매너로 신뢰감과 크리에이티브한 아이덴티티를 나타내며, 영상 기획 및 연출의 중심 화자로서 이야기를 이끌어갑니다.
+                </p>
+                <div class="persona-spec-list">
+                  <div class="spec-row">
+                    <span class="spec-key">아이덴티티</span>
+                    <span class="spec-val">Official Persona</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-key">캐릭터 시트</span>
+                    <span class="spec-val">Consistent Character Sheet</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-key">제작 워크플로우</span>
+                    <span class="spec-val">ComfyUI + Flux + LoRA</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Education & Core Philosophy -->
+          <div class="profile-bio-card">
+            <!-- Philosophy Quote -->
+            <div class="bio-quote-box">
+              <i data-lucide="quote" class="quote-icon"></i>
+              <blockquote class="bio-quote">
+                "작은 컷들이 모여 한 편의 이야기가 된다."
+              </blockquote>
+              <p class="bio-motto">No AI, No Gain — 기술을 넘어 감동을 연출하는 비디오 엔지니어</p>
+            </div>
+
+            <!-- Education Box -->
+            <div class="bio-section-box">
+              <div class="box-header">
+                <div class="box-icon-wrap">
+                  <i data-lucide="graduation-cap" class="box-icon"></i>
+                </div>
+                <div>
+                  <h3 class="box-title">전문 교육 사항</h3>
+                  <span class="box-subtitle">Professional Engineering Curriculum</span>
+                </div>
+              </div>
+              <div class="education-timeline-card">
+                <div class="edu-period">2026.07.20 — 2026.11.24 (수료)</div>
+                <h4 class="edu-course">AI로 만드는 스마트 영상 콘텐츠 제작 엔지니어링 과정</h4>
+                <p class="edu-desc">
+                  대형 언어 모델(LLM), 생성형 크리에이티브 AI 영상 엔진(Kling, MiniMax, Flow 등), 
+                  ComfyUI 기반 노드형 자동화 워크플로우, 음성/BGM AI 사운드 믹싱, 
+                  그리고 바이브 코딩(Antigravity)을 통합하여 차세대 스마트 영상 파이프라인을 체계적으로 마스터했습니다.
+                </p>
+                <div class="edu-highlights">
+                  <div class="highlight-chip">AI 영상 공모전 기획 & 출품</div>
+                  <div class="highlight-chip">캐릭터 시트 일관성 파이프라인</div>
+                  <div class="highlight-chip">스마트 나레이션 & 다국어 TTS</div>
+                  <div class="highlight-chip">Vibe Coding 웹 인터랙션 구축</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Core Strengths -->
+            <div class="strengths-grid">
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <i data-lucide="film"></i>
+                </div>
+                <h4>시네마틱 미장센</h4>
+                <p>프롬프트 엔지니어링 기반의 카메라 앵글, 조명, 렌즈 피사계 심도 정밀 제어</p>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <i data-lucide="cpu"></i>
+                </div>
+                <h4>워크플로우 자동화</h4>
+                <p>ComfyUI 노드 설계 및 Agent 기반 반복 작업 최소화, 고화질 업스케일링</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SKILLS -->
+    <section class="section-skills" id="skills">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="section-tag">TECHNICAL ARSENAL</span>
+          <h2 class="section-title">
+            스마트 <span class="gold-gradient-text">AI 기술 스택</span>
+          </h2>
+          <div class="gold-accent-line"></div>
+          <p class="section-desc">
+            기획부터 스토리보드, 비디오 생성, 음성 합성, 음원 작곡, 그리고 최종 배포까지<br>
+            엔드투엔드(End-to-End) 영상 제작을 가능케 하는 올인원 AI 테크놀로지 툴셋입니다.
+          </p>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="skills-bento-grid">
+          
+          <!-- Category 1: LLM & Agent -->
+          <div class="skill-category-card">
+            <div class="skill-card-top">
+              <div class="category-icon-box">
+                <i data-lucide="bot"></i>
+              </div>
+              <span class="category-count">3 TOOLS</span>
+            </div>
+            <h3 class="category-name">LLM & Intelligent Agent</h3>
+            <p class="category-summary">스토리 기획, 대본 작성, 씬별 프롬프트 자동화 및 페르소나 디렉팅</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill">
+                <i data-lucide="sparkles"></i>
+                <span>ChatGPT</span>
+              </div>
+              <div class="skill-tag-pill featured-pill">
+                <i data-lucide="sparkles"></i>
+                <span>Gemini</span>
+              </div>
+              <div class="skill-tag-pill">
+                <span>Meta AI</span>
+              </div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 95%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 2: Creative AI (Video & Image) -->
+          <div class="skill-category-card featured-glow">
+            <div class="skill-card-top">
+              <div class="category-icon-box gold-icon">
+                <i data-lucide="clapperboard"></i>
+              </div>
+              <span class="category-count">8 TOOLS</span>
+            </div>
+            <h3 class="category-name">Creative Video & Image AI</h3>
+            <p class="category-summary">최첨단 비디오 생성 엔진 및 고해상도 이미지 합성 파이프라인</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill"><span>Kling AI</span></div>
+              <div class="skill-tag-pill featured-pill"><span>MiniMax</span></div>
+              <div class="skill-tag-pill"><span>Flow</span></div>
+              <div class="skill-tag-pill"><span>Grok</span></div>
+              <div class="skill-tag-pill"><span>Nano Banana 2.1</span></div>
+              <div class="skill-tag-pill"><span>ChatGPT image 2.5</span></div>
+              <div class="skill-tag-pill"><span>Midjourney</span></div>
+              <div class="skill-tag-pill"><span>Seedance</span></div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 98%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 3: TTS & Voice Generation -->
+          <div class="skill-category-card">
+            <div class="skill-card-top">
+              <div class="category-icon-box">
+                <i data-lucide="mic"></i>
+              </div>
+              <span class="category-count">5 TOOLS</span>
+            </div>
+            <h3 class="category-name">TTS & Voice Synthesis</h3>
+            <p class="category-summary">감정 조절 나레이션, 다국어 음성 복제 및 맞춤형 더빙</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill"><span>Elevenlabs</span></div>
+              <div class="skill-tag-pill"><span>Google AI Studio</span></div>
+              <div class="skill-tag-pill"><span>Typecast</span></div>
+              <div class="skill-tag-pill"><span>클로바 더빙</span></div>
+              <div class="skill-tag-pill"><span>Vrew</span></div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 92%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 4: Music Generation -->
+          <div class="skill-category-card">
+            <div class="skill-card-top">
+              <div class="category-icon-box">
+                <i data-lucide="music"></i>
+              </div>
+              <span class="category-count">1 TOOL</span>
+            </div>
+            <h3 class="category-name">AI Music & OST</h3>
+            <p class="category-summary">영상 장르별 맞춤 오케스트라, 시네마틱 BGM 및 보컬 사운드트랙 작곡</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill">
+                <i data-lucide="disc"></i>
+                <span>SUNO AI (Pro Composer)</span>
+              </div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 96%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 5: Professional Video Editing -->
+          <div class="skill-category-card">
+            <div class="skill-card-top">
+              <div class="category-icon-box">
+                <i data-lucide="scissors"></i>
+              </div>
+              <span class="category-count">CORE EDITOR</span>
+            </div>
+            <h3 class="category-name">Video Post-Production</h3>
+            <p class="category-summary">컷 편집, 컬러 그레이딩, 모션 이펙트, 사운드 마스터링</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill">
+                <i data-lucide="scissors"></i>
+                <span>CapCut (Pro Editor)</span>
+              </div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 96%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 6: Workflow Automation (ComfyUI) -->
+          <div class="skill-category-card featured-glow">
+            <div class="skill-card-top">
+              <div class="category-icon-box gold-icon">
+                <i data-lucide="git-branch"></i>
+              </div>
+              <span class="category-count">CORE PIPELINE</span>
+            </div>
+            <h3 class="category-name">Workflow AI & Node Automation</h3>
+            <p class="category-summary">노드 기반 커스텀 워크플로우 설계, ControlNet, IP-Adapter 캐릭터 시트 일관성 유지</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill">
+                <i data-lucide="cpu"></i>
+                <span>ComfyUI Node Master</span>
+              </div>
+              <div class="skill-tag-pill"><span>ControlNet</span></div>
+              <div class="skill-tag-pill"><span>IP-Adapter</span></div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 97%;"></div>
+            </div>
+          </div>
+
+          <!-- Category 7: Vibe Coding & Web Deploy -->
+          <div class="skill-category-card wide-card">
+            <div class="skill-card-top">
+              <div class="category-icon-box">
+                <i data-lucide="terminal"></i>
+              </div>
+              <span class="category-count">DEV & DEPLOY</span>
+            </div>
+            <h3 class="category-name">Vibe Coding & Web Showcase Deployment</h3>
+            <p class="category-summary">AI 에이전트와 페어 프로그래밍으로 실시간 인터랙티브 포트폴리오 웹 제작 및 클라우드 호스팅</p>
+            <div class="skill-badges-container">
+              <div class="skill-tag-pill featured-pill"><span>Antigravity</span></div>
+              <div class="skill-tag-pill"><span>VS Code</span></div>
+              <div class="skill-tag-pill"><span>Three.js / GSAP</span></div>
+              <div class="skill-tag-pill"><span>GitHub</span></div>
+              <div class="skill-tag-pill"><span>Vercel / 닷홈 (Dothome)</span></div>
+            </div>
+            <div class="category-meter">
+              <div class="meter-bar" style="width: 95%;"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CONTACT -->
+    <section class="section-contact" id="contact">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="section-tag">GET IN TOUCH</span>
+          <h2 class="section-title">
+            새로운 이야기의 시작, <span class="gold-gradient-text">함께 만듭니다</span>
+          </h2>
+          <div class="gold-accent-line"></div>
+          <p class="section-desc">
+            AI 영상 제작, 광고/홍보 영상, 캐릭터 IP 기획, 공모전 협업 등<br>
+            귀사의 비전을 시네마틱한 이야기로 현실화해 드립니다. 편하게 문의해 주세요.
+          </p>
+        </div>
+
+        <div class="contact-card-wrapper">
+          <div class="contact-card">
+            <!-- Left Info -->
+            <div class="contact-info-col">
+              <h3 class="contact-info-heading">CONTACT DETAILS</h3>
+              <p class="contact-info-desc">
+                프로젝트 의뢰나 협업 제안은 아래 이메일로 보내주시면 24시간 이내에 성심껏 답변드리겠습니다.
+              </p>
+
+              <div class="contact-methods">
+                <!-- Email Item with Copy Button -->
+                <div class="contact-method-item">
+                  <div class="method-icon-wrap">
+                    <i data-lucide="mail"></i>
+                  </div>
+                  <div class="method-details">
+                    <span class="method-label">OFFICIAL INQUIRY EMAIL</span>
+                    <a href="mailto:a01084402665@gmail.com" class="method-value" id="emailText">a01084402665@gmail.com</a>
+                  </div>
+                  <button class="copy-btn" id="copyEmailBtn" title="이메일 주소 복사" aria-label="이메일 복사">
+                    <i data-lucide="copy" id="copyIcon"></i>
+                    <span class="copy-text">복사</span>
+                  </button>
+                </div>
+
+                <!-- Response Promise -->
+                <div class="contact-method-item">
+                  <div class="method-icon-wrap">
+                    <i data-lucide="clock"></i>
+                  </div>
+                  <div class="method-details">
+                    <span class="method-label">AVAILABILITY</span>
+                    <span class="method-value">상시 프로젝트 협업 & 상담 가능</span>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="contact-method-item">
+                  <div class="method-icon-wrap">
+                    <i data-lucide="map-pin"></i>
+                  </div>
+                  <div class="method-details">
+                    <span class="method-label">LOCATION</span>
+                    <span class="method-value">Seoul, Republic of Korea</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Brand signature quote -->
+              <div class="contact-quote-badge">
+                <span>"작은 컷들이 모여 한 편의 이야기가 된다."</span>
+              </div>
+            </div>
+
+            <!-- Right Interactive Message Form -->
+            <div class="contact-form-col">
+              <form class="luxury-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="senderName" class="form-label">성함 / 기업명 <span class="req">*</span></label>
+                    <input type="text" id="senderName" class="luxury-input" placeholder="홍길동 (또는 기업명)" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="senderContact" class="form-label">연락처 / 이메일 <span class="req">*</span></label>
+                    <input type="text" id="senderContact" class="luxury-input" placeholder="연락받으실 연락처 입력" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="projectType" class="form-label">문의 분야</label>
+                  <select id="projectType" class="luxury-input luxury-select">
+                    <option value="브랜드/광고 영상 제작">브랜드 / 광고 영상 제작</option>
+                    <option value="공모전 및 시네마틱 단편">공모전 및 시네마틱 단편</option>
+                    <option value="AI 캐릭터 IP & 애니메이션">AI 캐릭터 IP & 애니메이션</option>
+                    <option value="ComfyUI 파이프라인 컨설팅">ComfyUI 파이프라인 컨설팅</option>
+                    <option value="기타 협업 문의">기타 협업 문의</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="projectMessage" class="form-label">프로젝트 내용 <span class="req">*</span></label>
+                  <textarea id="projectMessage" class="luxury-input luxury-textarea" rows="4" placeholder="예상 일정, 희망하시는 영상의 톤앤매너 등을 자유롭게 남겨주세요." required></textarea>
+                </div>
+
+                <button type="submit" class="luxury-btn btn-primary btn-submit">
+                  <span class="btn-text">이메일 클라이언트로 문의 발송</span>
+                  <i data-lucide="send" class="btn-icon"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="luxury-footer" id="footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo footer-logo">
+            <div class="logo-symbol">
+              <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="22" cy="22" r="21" stroke="#D4AF37" stroke-width="1.2" stroke-opacity="0.8"/>
+                <path d="M14 11H25C29.4183 11 33 14.134 33 18C33 21.866 29.4183 25 25 25H19V33H14V11Z" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title">PP STUDIO</span>
+              <span class="logo-sub">AI CINEMATIC ATELIER</span>
+            </div>
+          </div>
+          <p class="footer-tagline">작은 컷들이 모여 한 편의 이야기가 된다.</p>
+        </div>
+
+        <div class="footer-nav">
+          <a href="#hero" data-scroll-to="#hero">홈</a>
+          <a href="#portfolio" data-scroll-to="#portfolio">포트폴리오</a>
+          <a href="#profile" data-scroll-to="#profile">프로필</a>
+          <a href="#skills" data-scroll-to="#skills">스킬</a>
+          <a href="#contact" data-scroll-to="#contact">연락처</a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © <span id="currentYear">2026</span> PP PORTFOLIO. All Rights Reserved. Crafted with Vibe Coding & Antigravity.
+        </p>
+        <p class="footer-deploy-info">
+          Supported Deployments: Dothome / GitHub Pages / Vercel
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING TOP BUTTON -->
+  <button class="luxury-top-btn" id="topBtn" aria-label="맨 위로 이동" title="맨 위로">
+    <i data-lucide="chevron-up" class="top-icon"></i>
+    <span class="top-text">TOP</span>
+  </button>
+
+  <!-- CINEMA VIDEO MODAL -->
+  <div class="cinema-modal" id="videoModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="모달 닫기">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-content">
+        <!-- Video Container -->
+        <div class="modal-video-wrapper">
+          <video id="modalVideoPlayer" controls playsinline preload="auto">
+            <source src="" type="video/mp4">
+            브라우저가 비디오 재생을 지원하지 않습니다.
+          </video>
+        </div>
+
+        <!-- Video Info Sidebar/Bottom -->
+        <div class="modal-details">
+          <div class="modal-badges">
+            <span class="modal-tag" id="modalTag">FEATURED WORK</span>
+            <span class="modal-ratio-pill" id="modalRatioPill">HD</span>
+          </div>
+          <h3 class="modal-title" id="modalTitle">영상 제목</h3>
+          <p class="modal-desc" id="modalDesc">영상 상세 설명</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="luxury-toast" id="luxuryToast">
+    <i data-lucide="check-circle-2" class="toast-icon"></i>
+    <span class="toast-message" id="toastMessage">이메일 주소가 복사되었습니다.</span>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

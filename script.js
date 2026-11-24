@@ -432,9 +432,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set video src & play
     modalVideoPlayer.src = videoSrc;
+    modalVideoPlayer.load();
     videoModal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    modalVideoPlayer.play().catch((err) => console.log('Autoplay blocked:', err));
+    const playPromise = modalVideoPlayer.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        console.log('Autoplay blocked or interaction required:', err);
+      });
+    }
 
     // Pause Lenis smooth scroll while modal is active
     if (lenis) lenis.stop();
@@ -445,7 +451,8 @@ document.addEventListener('DOMContentLoaded', () => {
     videoModal.classList.remove('active');
     modalVideoPlayer.pause();
     modalVideoPlayer.currentTime = 0;
-    modalVideoPlayer.src = '';
+    modalVideoPlayer.removeAttribute('src');
+    modalVideoPlayer.load();
     document.body.style.overflow = '';
 
     // Resume Lenis smooth scroll
